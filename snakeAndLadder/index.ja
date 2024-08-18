@@ -1,0 +1,30 @@
+// index.js
+const Entities = require('./models/Entities');
+const PlaySnakeAndLadder = require('./services/PlaySnakeAndLadder');
+
+const readline = require('readline-sync');
+
+const entities = Entities;
+
+const noOfSnakes = readline.questionInt('Enter number of snakes: ');
+for (let i = 0; i < noOfSnakes; i++) {
+    const startPosition = readline.questionInt('Enter snake start position: ');
+    const endPosition = readline.questionInt('Enter snake end position: ');
+    entities.setSnake(startPosition, endPosition);
+}
+
+const noOfLadders = readline.questionInt('Enter number of ladders: ');
+for (let i = 0; i < noOfLadders; i++) {
+    const startPosition = readline.questionInt('Enter ladder start position: ');
+    const endPosition = readline.questionInt('Enter ladder end position: ');
+    entities.setLadder(startPosition, endPosition);
+}
+
+const noOfPlayers = readline.questionInt('Enter number of players: ');
+for (let i = 0; i < noOfPlayers; i++) {
+    const player = readline.question('Enter player name: ');
+    entities.setPlayer(i, player);
+}
+
+const playSnakeAndLadder = new PlaySnakeAndLadder(6);
+console.log(`${playSnakeAndLadder.playGame()} wins the game`);
